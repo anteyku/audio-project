@@ -1,0 +1,164 @@
+
+
+  {{#if error}}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 gy-5">
+          <div class="error">{{@root.error}}</div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if succes}}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 gy-5">
+          <div class="succes">{{@root.succes}}</div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
+<div class="container cabinet">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="cabinet__background-image">
+        <img src="img/black-dress-queen-sitting-on-cemented-throne-r2-3840x2160.jpg" alt="фоновая картинка">
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="cabinet__mini-block">
+        <div class="cabinet__mini-block__title">{{login}}</div>
+        <div class="cabinet__mini-block__description">
+          Добро пожаловать в личный профиль, здесь вы можете редактировать свои данные
+        </div>
+      </div>
+
+      <div class="cabinet__line"></div>
+
+      <div class="cabinet__mini-block">
+        <div class="cabinet__mini-block__description">
+          Количество добавленных вами записей за все время
+        </div>
+        <div class="cabinet__mini-block__title">{{wrtLength}}</div>
+      </div>      
+    </div>
+  </div>
+
+
+<div class="row">
+    <div class="col-lg-8 cabinet__traks">
+      <div class="cabinet__traks__title">
+        Все ваши треки
+      </div>
+      <div class="container-fluid">
+        <div class="blocks">
+            <div class="row">
+              {{#each writes}}
+                {{#each this}}
+                  {{#if name}}
+                      <div class="col-lg-12 sound__block">
+                        <div class="container-fluid">
+                          <div class="row">
+                              <div class="col-lg-12 sound__block__author">
+                                <i class="fa-solid fa-circle-user"></i>
+                                {{ createUser }}
+                                <span>
+                                  <i class="fa-light fa-calendar-xmark"></i>
+                                  {{ createTime }}
+                                  </span>
+                              </div>
+                              <div class="col-lg-12 sound__block__image">
+                                <img src="images/backSound.webp" alt="картинка">
+                                <img src="images/backSound.webp" alt="" id="back-img">
+                              </div>
+                              <div class="col-lg-12 sound__block__audio">
+                                <div class="container-fluid">
+                                  <div class="row">
+                                    <div class="col-lg-1 sound__block__audio__img">
+                                    <i class="fa-regular fa-music"></i>
+                                    </div>
+                                    <div class="col-lg-10 sound__block__audio__track">
+                                      <div class="sound__block__audio__track__name">
+                                        {{ name }}
+                                        
+                                      </div>
+                                      <div class="sound__block__audio__track__visual">
+                                      </div>
+                                    </div>
+                                    <div data-audio="@audioPath@" id="@_id@" class="col-lg-1 sound__block__audio__play play__Now">
+                                      <a id="delete" href="/aploud/delete/{{ _id }}">Удалить</a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>   
+                          </div>
+                        </div>
+                      </div>                     
+                  {{/if}}      
+                  {{/each}}     
+              {{/each}}
+
+            </div>
+        </div>
+      </div>
+      <!--
+        <button type="submit" class="cabinet__setting__mini-block__btn">
+            Загрузить еще
+        </button>
+        -->
+    </div>
+
+    <div class="col-lg-4 cabinet__setting">
+      <form action="/cabinet/edit-password" method="post">
+      <div class="cabinet__setting__mini-block">
+          <div class="cabiten__setting__mini-block__title">
+            Старый пароль
+          </div>
+          <input name="oldpassword" placeholder="**************" type="password" class="cabinet__setting__mini-block__input">
+          <div class="cabiten__setting__mini-block__title">
+            Новый пароль
+          </div>
+          <input name="password" placeholder="**************" type="password" class="cabinet__setting__mini-block__input">
+          <button type="submit" class="cabinet__setting__mini-block__btn">
+            Edit
+          </button>
+        </div>
+        <input type="hidden" name="id" value="{{_id}}">
+        <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+      </form>
+      <form action="/cabinet/edit-name/{{_id}}" method="post">
+        <div class="cabinet__setting__mini-block">
+          <div class="cabiten__setting__mini-block__title">
+            Имя
+          </div>
+          <input name="name" placeholder="{{login}}" type="text" class="cabinet__setting__mini-block__input">
+          <button type="submit" class="cabinet__setting__mini-block__btn">
+            Edit
+          </button>
+          <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+        </div>
+      </form>
+
+    </div>
+
+</div>
+
+
+  </div>
+</div>
+
+<footer id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <a href="https://anteyku.com/" target="_new" class="col-lg-12 footer">
+      
+          Created by Anteyku 
+        
+      </a>
+    </div>
+  </div>
+</footer>
+

@@ -1,0 +1,331 @@
+<!-- Страница текущих аудио записей -->
+
+  <div class="container sound">
+    <div class="row">
+      <div class="col-lg-12">
+
+
+        <div class="container-fluid sound__tab">
+          <div class="row">
+            <div class="col-lg-2 sound__tab__image">
+              <i class="fa-brands fa-napster"></i>
+            </div>
+            <div class="col-lg-10 sound__tab__desc">
+              <div class="sound__tab__desc__title">
+                Listen to music
+              </div>
+              <div class="sound__tab__desc__description">
+                Здесь можно загрузить свою музыку или слушать ее совершенно бесплатно без каких либо ограничений
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <a href="/aploud" class="col-lg-3 offset-lg-9 btn-addSound">
+        Add Sound
+      </a>
+    </div>
+
+
+    <input id="csrf" type="hidden" data-csrf='{{@root.csrf}}'>
+
+  <!-- Блок в котором будут загружаться нашы новости из сервера -->
+  <div class="blocks"></div>
+
+  </div>
+
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                
+            </ul>
+          </nav>
+        </div>
+      </div>
+  </div>
+
+
+<footer id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <a href="https://anteyku.com/" target="_new" class="col-lg-12 footer">
+      
+          Created by Anteyku 
+        
+      </a>
+    </div>
+  </div>
+</footer>
+
+<!-- Конец страницы аудио записей -->
+
+
+  <script src="/script/mylibrary.js"></script>
+
+
+<script>
+
+
+
+
+
+
+  // items - елементы в которых содержиться номер страницы  
+  // table - блок в который загружаеться контент новостей
+  // shablon - html код блока добавляемого в блок новостей
+    // html - шаблон нашего блока добавляемого как новость
+    // paste - массив переменных которые мы вставили в наш шаблон
+    // pasteContent - имя ключей из обектов, которые заменят нашы переменные
+  // pageLink - блок в котором номера страниц (Родительсккий блок должен содержать в себе дочерний елемент с цифрой)
+  // pageShablon - html елемент добавляемой кнопки
+  // loadContentLength - количество подгружаемого нового контента
+  
+  
+  Pagination.pagePaginate({
+    // Блок в котором номера страниц
+    items: `.page-link`,
+    // Блок в который мы добавляем новый контент
+    table: document.querySelector(`.blocks`),
+    shablon:  {
+      // Шаблон самого добавляемого блока
+      html: `
+      <div class="row">
+        <div class="col-lg-12 sound__block">
+          <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 sound__block__author">
+                  <i class="fa-solid fa-circle-user"></i>
+                  @createUser@
+                  <span>
+                    <i class="fa-light fa-calendar-xmark"></i>
+                    @createTime@
+                    </span>
+                </div>
+                <div class="col-lg-12 sound__block__image">
+                  <img src="@imagePath@" alt="картинка">
+                  <img src="@imagePath@" alt="" id="back-img">
+                </div>
+                <div class="col-lg-12 sound__block__audio">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-lg-1 sound__block__audio__img">
+                      <i class="fa-regular fa-music"></i>
+                      </div>
+                      <div class="col-lg-10 sound__block__audio__track">
+                        <div class="sound__block__audio__track__name">
+                          @name@
+                          
+                        </div>
+                        <div class="sound__block__audio__track__visual">
+                          <div class="sound__block__audio__track__visual__line"></div>
+                        </div>
+                      </div>
+                      <div data-audio="@audioPath@" id="@_id@" class="col-lg-1 sound__block__audio__play play__Now">
+                        <i class="fa-solid fa-play"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>   
+            </div>
+          </div>
+        </div>
+      </div>`,
+      // Это названия переменных в нашем шаблоне которые нужно заменить
+      paste: [`@createUser@`,`@createTime@`,`@imagePath@`,`@name@`,`@audioPath@`, `@_id@`],
+      // Это названия ключей в обекте из сервера, содержимое которых заменит
+      // переменные (@createUser@ = createUser, @createTime@ = createTime)
+      pasteContent: [`createUser`, `createTime`, `imagePath`, `name`, `audioPath`, `_id`]
+    }, 
+    // Родительский блок нашых кнопок для переключения страниц
+    pageLink: document.querySelector(`.pagination`),
+    // Сам елемент кнопки для переключения на страницу
+    pageShablon : `<li class="page-item"><a class="page-link" href="#"></a></li>`,
+    // Запрос на сервер - получения базы данных
+    postRequest: `http://localhost:3001/getAudio`,
+    // Количество блоков нового контента подгружаемого в блок
+    loadContentLength: 2
+  })
+
+
+
+
+
+
+
+
+
+  let audio = new Audio();
+  audio.volume = 0.2;
+  let context;
+  let analyser;
+  let src;
+  let array;
+
+  // Родительский елемент в котором анимируються линии
+  let thisSound;
+  // id родителя текущего елемента
+  // Если я нажму на кнопку "play" в другом блоке то будет проверка 
+  // которая в блоке с id до этого установить другую иконку
+  let thisIdElement;
+
+
+  function preparation(){
+    // аудио контекст представляет собой объект, состоящий из аудио модулей
+    // он управляет созданием узлов и выполняет обработку (декодирование) аудио данных
+    context = new AudioContext();
+    analyser = context.createAnalyser();
+    src = context.createMediaElementSource(audio);
+    src.connect(analyser);
+    analyser.connect(context.destination);
+    loop();
+  }
+
+
+  // elem - родительский елемент который содержыт полосы 
+  function loop(){
+    
+    if(!audio.paused){
+      window.requestAnimationFrame(loop);
+    }
+    
+    array = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(array);
+
+
+    // Удаляю все линии при начинании новой итерации
+      for(let i = 0; i < thisSound.parentElement.children[1].children[1].children.length; i++){
+        thisSound.parentElement.children[1].children[1].removeChild(thisSound.parentElement.children[1].children[1].children[i]);
+      }
+      
+    
+
+
+  
+    for(let i = 0; i < 54; i++){
+      let line = document.createElement(`div`);
+      line.classList.add(`sound__block__audio__track__visual__line`);
+      thisSound.parentElement.children[1].children[1].appendChild(line);
+    }
+
+
+    // Устанавливаю высоту каждой линии в зависимости от елемента выбранном в массиве
+    for(let i = 0; i < thisSound.parentElement.children[1].children[1].children.length; i++){
+      thisSound.parentElement.children[1].children[1].children[i].style.height = (array[i] / 7) + `px`;
+      thisSound.parentElement.parentElement.parentElement.parentElement.children[1].children[0].style.transform = `scale(0.9${Math.floor(array[1]) / 5})`
+    }
+  
+
+
+
+  
+  }
+
+
+// Проверка на то - нажато ли на кнопку play
+ window.addEventListener(`click`, (elem)=>{
+  
+    if(elem.target.className == `fa-solid fa-play` || elem.target.className == `fa-solid fa-pause`){
+
+      thisSound = elem.composedPath()[1];
+      
+      // thisSound.parentElement.parentElement.parentElement.parentElement.children[1].children[0].style.transform = `translateX(${Math.floor(array[1]) / 5}px)`
+      
+      
+
+      // Изминения кнопки pause и play в текущем блоке
+
+      if(elem.composedPath()[1].innerHTML.toString() == `
+                        <i class="fa-solid fa-play"></i>
+                      ` || elem.composedPath()[1].innerHTML.toString() == `<i class="fa-solid fa-play"></i>`){
+                     
+                      
+                     
+                      elem.composedPath()[1].innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                        
+                        // Если это песня которую мы не слушали ранее или это первая  песня
+                        // которую мы включили после загрузки страницы то мы устанавливаем
+                        // к ней путь (чтобе если это песня которую мы слушали ранее 
+                        // не включалась с начала при повторном нажатии на play)
+                        
+                        if(thisIdElement == undefined || thisIdElement !== elem.composedPath()[1].id){
+                          // Прописываем путь к текущей музыке
+                          audio.src = elem.composedPath()[1].attributes[0].value;
+                        }
+
+        // Увеличиваю окно картинки при нажатии на кнопку "play"
+        thisSound.parentElement.parentElement.parentElement.parentElement.children[1].style.height = `300px`
+                       
+      } else {
+     
+                      elem.composedPath()[1].innerHTML = `<i class="fa-solid fa-play"></i>`;
+                      
+               
+      }
+
+
+      // Проверка на то что мы изменили блок в котором хотим чтобе играла музыка 
+      if(thisIdElement == undefined || thisIdElement == elem.composedPath()[1].id){
+        thisIdElement = elem.composedPath()[1].id; 
+      } else {
+
+        if(document.getElementById(`${thisIdElement}`)){
+          // Установка кнопки "play" из прошлого блока музыки
+          document.getElementById(`${thisIdElement}`).innerHTML = `<i class="fa-solid fa-play"></i>`;
+          // Уменньшаю окно картинки при нажатии на кнопку "play"
+          document.getElementById(`${thisIdElement}`).parentElement.parentElement.parentElement.parentElement.children[1].style.height = `137px`;
+          // Удаления всех линий из прошлого блока музыки
+          document.getElementById(thisIdElement).parentElement.children[1].children[1].innerHTML = ``;
+        }
+          // Установка id нового блока музыки
+          thisIdElement = elem.composedPath()[1].id; 
+        
+
+      }
+
+      
+     
+      if(!context){
+        preparation();
+      }
+
+      if(audio.paused){
+        audio.play();
+        loop();
+      } else {
+        audio.pause();
+      }
+    }
+   
+ })
+
+
+
+
+
+// Прослушиваем когда закончиться проигрывать музыка текущая
+audio.addEventListener(`ended`, (event)=>{
+  // Изминяем кнопки "pause" на "play"
+  console.log('Песня закончилась');
+  document.getElementById(`${thisIdElement}`).innerHTML = `<i class="fa-solid fa-play"></i>`;
+  // Уменньшаю окно картинки при окончании трека
+  document.getElementById(`${thisIdElement}`).parentElement.parentElement.parentElement.parentElement.children[1].style.height = `137px`;
+})
+
+
+
+
+
+
+
+
+
+
+
+</script>

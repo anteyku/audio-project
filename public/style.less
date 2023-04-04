@@ -1,0 +1,845 @@
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css");
+@font-face 
+{
+	font-family:"Rollingstand";
+	src:url("/Rollingstand.eot?") format("eot"),
+	url("/Rollingstand.woff") format("woff"),
+	url("/Rollingstand.ttf") format("truetype"),
+	url("/Rollingstand.svg#RollingstandRegular") format("svg");
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face { font-family: 'COCOMAT-Light';  src: local('COCOMAT-Light'), url('https://nomail.com.ua/files/woff/6f066397e454197f3d591c8edbe370ee.woff') format('woff'); }
+
+@rol: "Rollingstand";
+@comat: 'COCOMAT-Light';
+@roboto: 'Roboto', sans-serif;
+
+*{
+	box-sizing: border-box;
+}
+
+i {
+	font-family: fontawesome !important;
+}
+
+#header{
+	margin-top: 65px;
+	display: flex;
+	align-items: center;
+
+	
+	.header__logo{
+		font-family: @rol;
+		font-size: 70px;
+		text-align: center;
+		line-height: 40px;
+		i{
+			font-style:inherit;
+			font-size: 50px;
+		}
+	}
+	.active{
+		color: #B388FF !important;
+	}
+
+	.activeBack{
+		color: white !important;
+	}
+	.header-btn-align{
+		border-color: red;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		.header__page{
+			text-align: center;
+			font-family: @comat;
+			font-size: 20px;
+			margin-top: 3%;
+			text-decoration: none;
+			display: block;
+			color: black;
+			transition-duration: 200ms;
+			&:hover{
+				color: #B388FF;
+			}
+		}
+	}
+	.header__registration{
+		text-align: center;
+		font-family: @comat;
+		font-size: 20px;
+		background-color: #B388FF;
+		padding: 2%;
+		text-decoration: none;
+		display: block;
+		color: black;
+		transition-duration: 200ms;
+		box-shadow: 6px 6px 0px black;
+		&:hover{
+			background-color: black;
+			color: white;
+			box-shadow: 6px 6px 0px #B388FF;
+		}
+	}
+}
+
+
+#main{
+	// Регистрация
+	min-height: 62vw;
+	.registration{
+		
+		width: 100%;
+		margin-top: 20%;
+		display: block;
+		padding-top: 3%;
+		padding-bottom: 2%;
+		border: 1px solid #FFFFFF;
+		box-sizing: border-box;
+		box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.25);
+		border-radius: 5px;
+		.registration__title{
+			width: 100%;
+			border-color: red;
+			text-align: center;
+			font-family: @roboto;
+			font-size: 45px;
+			font-weight: normal;
+			color: black;
+			margin-bottom: 7%;
+		}
+		.registration__value-name{
+			width: 80%;
+			border-color: blue;
+			margin: 0 auto;
+			margin-top: 1%;
+			margin-bottom: 4%;
+			input{
+				width: 100%;
+				border: 1px solid #FFFFFF;
+				display: block;
+				box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.25);
+				border-radius: 5px;
+				text-align: center;
+				font-family: @roboto;
+				font-size: 26px;
+				outline: none;
+				padding-top: 0.5%;
+				padding-bottom: 0.5%;
+				
+
+				&::placeholder{
+					color: rgba(0, 0, 0, 0.34);
+				}
+			}
+		}
+		#reg{
+			width: 60%;
+			margin: 0 auto;
+			display: block;
+			border-style: none;
+			text-align: center;
+			color: white;
+			background: #B388FF;
+			font-family: @roboto;
+			font-size: 20px;
+			font-weight: 500;
+			border: 2px solid #B388FF;
+			box-sizing: border-box;
+			border-radius: 10px;
+			margin-top: 9%;
+			padding-top: 1.4%;
+			padding-bottom: 1.4%;
+			transition-duration: 300ms;
+			&:hover{
+				color: white;
+				background-color: black;
+				border-color: black;
+			}
+		}
+		#auth{
+			width: 60%;
+			margin: 0 auto;
+			display: block;
+			border-style: none;
+			text-align: center;
+			color: #B388FF;
+			background: white;
+			font-family: @roboto;
+			font-size: 20px;
+			font-weight: 500;
+			border: 2px solid #B388FF;
+			box-sizing: border-box;
+			border-radius: 10px;
+			margin-top: 3%;
+			padding-top: 1%;
+			padding-bottom: 1%;
+			transition-duration: 300ms;
+			text-decoration: none;
+			&:hover{
+				color: white;
+				background-color: black;
+				border-color: black;
+			}
+		}
+		.registration__reset-password{
+			width: 100%;
+			text-align: center;
+			font-family: @roboto;
+			margin-top: 4%;
+			margin-bottom: 4%;
+			font-size: 20px;
+			display: block;
+			text-decoration: none;
+			color: black;
+			font-weight: 300;
+			transition-duration: 200ms;
+			&:hover{
+				color: #B388FF;
+			}
+		}
+	}
+	// Конец регистрации
+}
+
+
+
+// Возстановления пароль
+#main.password{
+	form.registration{
+		padding: 10%;
+		.registration__title{
+			line-height: 43px;
+		}
+	}
+}
+
+
+
+// Подвал сайта
+#footer{
+	width: 100%;
+	.footer{
+		width: 100%;
+		background-color: black;
+		color: white;
+		text-align: center;
+		padding: 1.3%;
+		display: block;
+		text-decoration: none;
+
+		&:hover{
+			color:greenyellow;
+		}
+
+	}
+}
+
+
+// Сообщения об ошыбке 
+.error{
+	background-color: rgb(250, 108, 108);
+	color: white;
+	text-align: center;
+	padding: 1%;
+}
+
+// Сообщения об успехе
+.succes{
+	background-color: rgb(177, 250, 108);
+	color: black;
+	text-align: center;
+	padding: 1%;
+}
+
+
+
+
+// Главная страница
+.imp{
+	width: 100%;
+	margin-top: 10%;
+	min-height: 49.1vw;
+	.img__right{
+		padding-left: 0;
+		padding-right: 0;
+		padding-top: 10%;
+		img{
+			width: 100%;
+			// animation-name: imp;
+			animation-duration: 1s;
+			animation-timing-function: ease-in-out;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+		}
+	}
+	.imp__left{
+		border-color: blue;
+		.imp__left__title{
+			border-color: orange;
+			font-family: @roboto;
+			font-weight: 500;
+			font-size: 48px;
+			line-height: 56px;
+
+			span{
+				color: #B388FF; 
+			}
+		}
+		.imp__left__description{
+			border-color: red;
+			font-family: @roboto;
+			font-weight: 300;
+			margin-top: 2%;
+			font-size: 18px;
+
+		}
+		.imp__left__button{
+			display: inline-block;
+			margin-top: 5%;
+			text-decoration: none;
+			background-color: black;
+			font-family: @roboto;
+			font-size: 14px;
+			font-weight: 500;
+			color: white;
+			padding-left: 5%;
+			padding-right: 5%;
+			padding-top: 2.4%;
+			padding-bottom: 1.8%;
+			border-radius: 4px;
+			box-shadow: 6px 6px 0px #B388FF;
+			transition-duration: 300ms;
+
+			&:hover{
+				background-color: #B388FF;
+				box-shadow: -6px 6px 0px black;
+			}
+		}
+	}
+}
+
+
+/* Страница загрузки файла */
+.upload{
+	min-height: 49.1vw;
+	margin-top: 7%;
+	.upload__title{
+		text-align: center;
+		font-family: @roboto;
+		font-size: 31px;
+		font-weight: 300;
+	}
+
+	.mb-3{
+		#formFile{
+			width: 50%;
+			margin: 0 auto;
+			margin-top: 2%;
+		}
+	}
+
+	.upload__upload-file{
+		margin-top: 3%;
+		display: flex;
+		justify-content: center;
+		input{
+		}
+	}
+}
+.upload__btn{
+	border-style: solid;
+	border-color: #B388FF;
+	margin: 0 auto;
+	margin-top: 6%;
+	text-align: center;
+	font-family: @roboto;
+	font-size: 24px;
+	color:  #B388FF;
+	font-weight: 700;
+	border-width: 2px;
+	border-radius: 10px;
+	padding: 0.8%;
+	cursor: pointer;
+	background-color: white;
+
+	&:hover{
+		background-color: #B388FF;
+		color: white;
+	}
+
+}
+
+.upload__name{
+	text-align: center;
+	font-family: @roboto;
+	font-size: 31px;
+	font-weight: 300;
+	margin-top: 5%;
+	box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.25);
+	border-radius: 5px;
+	border-style: none;
+}
+/* Конец страницы загрузки файла */
+
+
+
+/* Страница текущих аудио записей */
+.sound{
+	margin-top: 5%;
+	margin-bottom: 15%;
+	.sound__tab{
+		border-style: solid;
+		border-width: 2px;
+		padding: 1%;
+		justify-content: space-between;
+		.sound__tab__image{
+			font-size: 90px;
+			text-align: center;
+			line-height: 90px;
+			max-height: 150px;
+		}
+		.sound__tab__desc{
+			.sound__tab__desc__title{
+				font-family: @roboto;
+				font-weight: 500;
+				font-size: 19px;
+			}
+			.sound__tab__desc__description{
+				font-family: @roboto;
+				font-weight: 300;
+				font-size: 20px;
+				line-height: 25px;
+			}
+		}
+	}
+
+
+
+
+	.btn-addSound{
+		border-style: solid;
+		text-align: center;
+		text-decoration: none;
+		color: #B388FF;
+		border-radius: 10px;
+		border-width: 2px;
+		font-family: @roboto;
+		font-weight: 700;
+		font-size: 20px;
+		padding: 0.5%;
+		margin-top: 3%;
+		position: relative;
+		overflow: hidden;
+		transform: scale(1);
+		transition-duration: 300ms;
+		margin-bottom: 5%;
+
+
+		&:before{
+			width: 100%;
+			height: 100%;
+			background-color: #B388FF;
+			content: "";
+			position: absolute;
+			top: 0;
+			left: -100%;
+			z-index: -9;
+			transition-duration: 300ms;
+		}
+
+		&:hover{
+			color: white;
+			border-color: #B388FF;
+			transform: scale(0.9);
+
+			&:before{
+				left: 0%;
+			}
+		}
+	}
+
+
+	// Блок с треком
+	.sound__block{
+		margin-top: 5%;
+		padding: 0%;
+		.sound__block__author{
+			font-family: @roboto;
+			display: flex;
+			align-items: center;
+			font-weight: 300;
+			i{
+				font-size: 20px;
+				margin-right: 1%;
+			}
+			span{
+				font-family: @roboto;
+				margin-left: auto;
+				width: 50%;
+				text-align: right;
+			}
+		}
+		.sound__block__image{
+			padding-left: 0%;
+			height: 137px;
+			overflow: hidden;
+			position: relative;
+			margin-top: 0.2%;
+			transition-duration: 300ms;
+			img{
+				width: 86%;
+				position: absolute;
+				top: -50%;
+				left: 7%;
+				transition-duration: 200ms;
+				transform: scale(1);
+			}
+			img#back-img{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				z-index: -9999;
+				filter: blur(10px);
+			}
+		}
+		.sound__block__audio{
+			border-style: solid;
+			border-bottom-left-radius: 70px;
+			border-top-right-radius: 70px;
+			border-width: 2px;
+			margin-top: 1%;
+			width: 98%;
+			margin-left: auto;
+			box-shadow: -10px 15px 0px 0px black;
+			.sound__block__audio__img{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				i{
+					font-size: 38px;
+				}
+			}
+			.sound__block__audio__track{
+				border-color: red;
+				text-align: center;
+				padding-left: 0%;
+				padding-right: 0%;
+		
+				.sound__block__audio__track__name{
+					border-color: orange;
+					text-align: left;
+					font-family: @roboto;
+					font-weight: 500;
+					font-size: 16px;
+					margin-top: 0.5%;
+				}
+				.sound__block__audio__track__visual{
+					border-color: red;
+					margin-bottom: 1%;
+					display: flex;
+					height: 30px;
+					overflow: hidden;
+					.sound__block__audio__track__visual__line{
+						width: 5px;
+						height: 20px;
+						background-color: black;
+						margin-left: 3px;
+						margin-top: auto;
+					}
+				}
+			}
+			.sound__block__audio__play{
+				border-color: blue;
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				a{
+					color: red;
+				}
+
+				i{
+					font-size: 38px;
+					cursor: pointer;
+					transform: scale(1);
+					transition-duration: 100ms;
+					&:hover{
+						transform: scale(0.9);
+						color: grey;
+					}
+				}
+			}
+		}
+	}
+	// Конец блока с треком
+
+
+
+}
+	// Пагинация
+	.pagination{
+		margin-bottom: 10%;
+	}
+	// Конец пагинации
+/* Конец страницы текущих аудио записей */
+
+
+
+
+/* Страница личьного кабинета */
+.cabinet{
+	margin-top: 5%;
+	margin-bottom: 90px;
+	.cabinet__background-image{
+		border-color: red;
+		
+		img{
+			width: 100%;
+		}
+	}
+	.cabinet__mini-block{
+		border-color: blue;
+		box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.25);
+		padding: 8%;
+		padding-top: 4%;
+		margin-top: 2%;
+
+		.cabinet__mini-block__title{
+			border-color: orange;
+			text-align: center;
+			font-family: @roboto;
+			font-size: 20px;
+			font-weight: 700;
+		}
+		.cabinet__mini-block__description{
+				border-color: pink;
+				text-align: center;
+				font-family: @roboto;
+				font-size: 18px;
+				font-weight: 300;
+				line-height: 21px;
+				margin-top: 10px;
+		}
+	}
+
+	.cabinet__line{
+		width: 100%;
+		background: rgba(0, 0, 0, 0.13);
+		height: 2px;
+		margin-top: 10%;
+		margin-bottom: 10%;
+	}
+
+	.cabinet__traks{
+		margin-top: 3%;
+		
+		.cabinet__traks__title{
+			font-family: @comat;
+			font-weight: 300;
+			font-size: 22px;
+			text-align: center;
+		}
+
+		.cabinet__setting__mini-block__btn{
+			width: 50%;
+			text-align: center;
+			font-family: @comat;
+			font-size: 20px;
+			background-color: #B388FF;
+			padding: 0.5%;
+			text-decoration: none;
+			display: block;
+			color: black;
+			transition-duration: 200ms;
+			box-shadow: 6px 6px 0px black;
+			margin: 0 auto;
+			margin-top: 5%;
+			border-style: none;
+			&:hover{
+				background-color: black;
+				color: white;
+				box-shadow: 6px 6px 0px #B388FF;
+			}
+		}
+
+
+		.sound__block{
+			margin-top: 5%;
+			padding: 0%;
+			.sound__block__author{
+				font-family: @roboto;
+				display: flex;
+				align-items: center;
+				font-weight: 300;
+				i{
+					font-size: 20px;
+					margin-right: 1%;
+				}
+				span{
+					font-family: @roboto;
+					margin-left: auto;
+					width: 50%;
+					text-align: right;
+				}
+			}
+			.sound__block__image{
+				padding-left: 0%;
+				height: 137px;
+				overflow: hidden;
+				position: relative;
+				margin-top: 0.2%;
+				transition-duration: 300ms;
+				img{
+					width: 86%;
+					position: absolute;
+					top: -50%;
+					left: 7%;
+					transition-duration: 200ms;
+					transform: scale(1);
+				}
+				img#back-img{
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					z-index: -9999;
+					filter: blur(10px);
+				}
+			}
+			.sound__block__audio{
+				border-style: solid;
+				border-bottom-left-radius: 70px;
+				border-top-right-radius: 70px;
+				border-width: 2px;
+				margin-top: 1%;
+				width: 98%;
+				margin-left: auto;
+				box-shadow: -10px 15px 0px 0px black;
+				.sound__block__audio__img{
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					i{
+						font-size: 38px;
+					}
+				}
+				.sound__block__audio__track{
+					border-color: red;
+					text-align: center;
+					padding-left: 0%;
+					padding-right: 0%;
+			
+					.sound__block__audio__track__name{
+						border-color: orange;
+						text-align: left;
+						font-family: @roboto;
+						font-weight: 500;
+						font-size: 16px;
+						margin-top: 0.5%;
+					}
+					.sound__block__audio__track__visual{
+						border-color: red;
+						margin-bottom: 1%;
+						display: flex;
+						height: 30px;
+						overflow: hidden;
+						.sound__block__audio__track__visual__line{
+							width: 5px;
+							height: 20px;
+							background-color: black;
+							margin-left: 3px;
+							margin-top: auto;
+						}
+					}
+				}
+				.sound__block__audio__play{
+					border-color: blue;
+					text-align: center;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					i{
+						font-size: 38px;
+						cursor: pointer;
+						transform: scale(1);
+						transition-duration: 100ms;
+						&:hover{
+							transform: scale(0.9);
+							color: grey;
+						}
+					}
+					a{
+						display: block;
+						text-decoration: none;
+						color: grey;
+						padding: 6%;
+						font-family: @roboto;
+						font-weight: 500;
+
+						&:hover{
+							color: black;
+						}
+					}
+				}
+			}
+		}
+
+
+	}
+
+	.cabinet__setting{
+		margin-top: 3%;
+		.cabinet__setting__mini-block{
+			border-color:#B388FF;
+			margin-top: 10%;
+			.cabiten__setting__mini-block__title{
+				text-align: center;
+				font-family: @roboto;
+				font-size: 20px;
+				font-weight: 700;
+			}
+			.cabinet__setting__mini-block__input{
+				width: 100%;
+				display: block;
+				box-shadow: 0px 0px 9px 1px rgba(0, 0, 0, 0.25);
+				margin-top: 2%;
+				border-style: none;
+				padding: 2%;
+				padding-left: 4%;
+
+				&::placeholder{
+					text-align: center;
+					color: black;
+					font-size: 20px;
+				}
+			}
+			.cabinet__setting__mini-block__btn{
+				width: 50%;
+				text-align: center;
+				font-family: @comat;
+				font-size: 20px;
+				background-color: #B388FF;
+				padding: 1%;
+				text-decoration: none;
+				display: block;
+				color: black;
+				transition-duration: 200ms;
+				box-shadow: 6px 6px 0px black;
+				margin: 0 auto;
+				margin-top: 5%;
+				border-style: none;
+				&:hover{
+					background-color: black;
+					color: white;
+					box-shadow: 6px 6px 0px #B388FF;
+				}
+			}
+		}
+	}
+}
+/* Конец личьного кабинета */

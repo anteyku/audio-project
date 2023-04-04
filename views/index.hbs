@@ -1,0 +1,68 @@
+
+
+ 
+  
+  {{#if error}}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 gy-5">
+          <div class="error">{{@root.error}}</div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if succes}}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 gy-5">
+          <div class="succes">{{@root.succes}}</div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
+
+
+
+
+
+<main id="main">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <form action="/register" method="POST" class="registration">
+          <div class="registration__title">Регистрация</div>
+          <div class="registration__value-name">
+            <input name="login" type="text" placeholder="Имя (Только english)">
+          </div>
+          <div class="registration__value-name">
+            <input name="email" type="text" placeholder="Email (Только gmail)">
+          </div>
+          <div class="registration__value-name">
+            <input name="password" type="password" placeholder="Пароль">
+          </div>
+          <button id="reg">Зарегистрироваться</button>
+          <a href="/auth" id="auth">Авторризация</a>
+          <a href="/password" class="registration__reset-password">Забыл пароль</a>
+          <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<footer id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <a href="https://anteyku.com/" target="_new" class="col-lg-12 footer">
+      
+          Created by Anteyku 
+        
+      </a>
+    </div>
+  </div>
+</footer>
+ 

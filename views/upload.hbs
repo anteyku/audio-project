@@ -1,0 +1,127 @@
+  {{#if error}}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 gy-5">
+          <div class="error">{{@root.error}}</div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+  {{#if succes}}
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 gy-5">
+          <div class="succes">{{@root.succes}}</div>
+        </div>
+      </div>
+    </div>
+  {{/if}}
+
+
+
+<div class="container upload">
+  <form action="/aploud/save" method="post" enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="upload__title">
+          Добавления Audio <br/>
+          audio/mp3, audio/mp4,  audio/mpeg,
+        </div>
+        <!--
+        <div class="upload__upload-file">
+          <input name="audio" type="file">
+        </div>
+        -->
+      <div class="mb-3">
+        <input name="audio" class="form-control" type="file" id="formFile">
+      </div>
+
+      </div>
+    </div>
+      <div class="row">
+      <div class="col-lg-12 gy-3">
+        <div class="upload__title">
+          Добавления Image <br/>
+           image/jpg, image/jpeg, image/png, image/webp
+        </div>
+        <!--
+        <div class="upload__upload-file">
+          <input name="image" type="file">
+        </div>
+        -->
+      <div class="mb-3">
+        <input name="image" class="form-control" type="file" id="formFile">
+      </div>
+
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <input id="file" type="text" name="name" placeholder="Название" class="col-lg-12 upload__name">
+     
+    </div>
+
+
+
+    <div class="row">
+      <button type="submit" data-csrf='{{@root.csrf}}' class="col-lg-3 upload__btn">
+        Добавить музыку 
+      </button>
+    </div>
+
+    
+    <input type="hidden" data-csrf='{{@root.csrf}}'>
+
+  </form>
+</div>
+
+<footer id="footer">
+  <div class="container-fluid">
+    <div class="row">
+      <a href="https://anteyku.com/" target="_new" class="col-lg-12 footer">
+      
+          Created by Anteyku 
+        
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+
+
+
+
+
+    document.querySelector(`button`).addEventListener(`click`, (event)=>{
+
+    event.preventDefault();
+
+            let csrf = event.target.dataset.csrf;
+            const form = document.querySelector(`form`);
+            let formData = new FormData(form);
+           
+            console.log(formData.get(`audio`));
+
+    				fetch(`http://localhost:3001/aploud/audio`, {
+				    method: 'POST',
+				    mode: 'cors',
+            body: formData,
+				    headers: {
+                'X-XSRF-TOKEN': csrf
+				    }
+            }).then((response)=>{
+              // Разпарсиваем полученную JSON строку и передаем в следующий then
+              return response.json()
+            }).then((infa)=>{
+              console.log(infa);
+              // Пережагружаю страницу
+              window.location.reload()
+            })
+    
+  })
+</script>
