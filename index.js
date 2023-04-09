@@ -29,7 +29,7 @@ let store = new MongoStore({
   uri: keys.mongoURL
 })
 let sessionMiddleware = session({
-  secret: keys.secret,
+  secret: `im not bad guy` ,// keys.secret,
   resave: true,
   saveUninitialized: true,
   cookie: { // Автоудаления сессии через 1 час
